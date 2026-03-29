@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Heart Animation</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #000;
+  height: 100vh;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+#ui {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+#ui .love {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -225px 0 0 -225px;
+}
+
+#ui .love_word {
+  color: #ea80b0;
+  font-size: 1.4rem;
+  transform: translateY(-100%) rotateZ(-30deg);
+  text-shadow: 0 0 10px #fff;
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+
+#ui .love_horizontal {
+  animation: horizontal 10000ms infinite alternate ease-in-out;
+  animation-delay: calc(var(--i) * -300ms);
+}
+
+#ui .love_vertical {
+  animation: vertical 20000ms infinite linear;
+  animation-delay: calc(var(--i) * -300ms);
+}
+
+@keyframes horizontal {
+  from { transform: translateX(0px); }
+  to { transform: translateX(450px); }
+}
+
+@keyframes vertical {
+  0% { transform: translateY(180px); }
+  10% { transform: translateY(45px); }
+  15% { transform: translateY(4.5px); }
+  18% { transform: translateY(0px); }
+  20% { transform: translateY(4.5px); }
+  22% { transform: translateY(34px); }
+  24% { transform: translateY(64px); }
+  25% { transform: translateY(112px); }
+  30% { transform: translateY(4px); }
+  32% { transform: translateY(0px); }
+  40% { transform: translateY(45px); }
+  50% { transform: translateY(180px); }
+  75% { transform: translateY(450px); }
+  100% { transform: translateY(180px); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 Música -->
+<audio id="music" loop>
+  <source src="ytmp3free.cc_i-wanna-be-yours-youtubemp3free.org.mp3" type="audio/mpeg">
+</audio>
+
+<div id="ui"></div>
+
+<script>
+// tocar música ao clicar (funciona em todos navegadores)
+document.addEventListener("click", () => {
+  document.getElementById("music").play();
+});
+
+const words = [
+"Te amo Beatriz","I love you Beatriz","Je t’aime Beatriz","Ti amo Beatriz",
+"Liebe dich Beatriz","Amor Beatriz","Meu amor Beatriz","❤ Beatriz"
+];
+
+const ui = document.getElementById("ui");
+
+for (let i = 0; i < 80; i++) {
+  const word = words[i % words.length];
+
+  const love = document.createElement("div");
+  love.className = "love";
+  love.style.setProperty("--i", i + 1);
+
+  love.innerHTML = `
+    <div class="love_horizontal">
+      <div class="love_vertical">
+        <div class="love_word">${word}</div>
+      </div>
+    </div>
+  `;
+
+  ui.appendChild(love);
+}
+</script>
+
+</body>
+</html>
